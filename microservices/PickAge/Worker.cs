@@ -12,7 +12,7 @@ namespace PickAge
     public Worker(IConfiguration configuration)
     {
       _connectionString = configuration["ServiceBus:ConnectionString"] ?? Environment.GetEnvironmentVariable("SERVICEBUS_CONNECTION_STRING")!;
-      _queueName = configuration["ServiceBus:QueueName"] ?? Environment.GetEnvironmentVariable("SERVICE_BUS_QUEUE_NAME")!;
+      _queueName = configuration["ServiceBus:QueueName"] ?? Environment.GetEnvironmentVariable("SERVICEBUS_QUEUE_NAME")!;
       _client = new ServiceBusClient(_connectionString);
       _processor = _client.CreateProcessor(_queueName, new ServiceBusProcessorOptions());
     }
