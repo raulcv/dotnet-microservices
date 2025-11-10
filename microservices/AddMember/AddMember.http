@@ -1,6 +1,8 @@
 @AddMember_HostAddress = http://localhost:5111
 @Docker_HostAddress = http://localhost:8085
 
+@Azure_HostAddress = https://addmember.gentlesmoke-3e8e96d3.eastus2.azurecontainerapps.io
+
 ### Adult
 POST {{AddMember_HostAddress}}/addmember?name=Paul&LastName=pulpo&birthyear=2000
 Content-Type: application/json
@@ -18,5 +20,15 @@ Accept: application/json
 
 ### Child
 POST {{Docker_HostAddress}}/addmember?name=Dayana&LastName=Dayaka&birthyear=2017
+Content-Type: application/json
+Accept: application/json
+
+### Azure Adult
+POST {{Azure_HostAddress}}/addmember?name=PeterAzure&LastName=Azure&birthyear=1999
+Content-Type: application/json
+Accept: application/json
+
+### Azure Child
+POST {{Azure_HostAddress}}/addmember?name=DayanaAzure&LastName=AzureChild&birthyear=2011
 Content-Type: application/json
 Accept: application/json
