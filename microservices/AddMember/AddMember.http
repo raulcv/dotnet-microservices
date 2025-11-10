@@ -4,7 +4,7 @@
 @Azure_HostAddress = https://addmember.gentlesmoke-3e8e96d3.eastus2.azurecontainerapps.io
 
 ### Adult
-POST {{AddMember_HostAddress}}/addmember?name=Paul&LastName=pulpo&birthyear=2000
+POST {{AddMember_HostAddress}}/addmember?name=Paul2&LastName=pulpo2&birthyear=2000
 Content-Type: application/json
 Accept: application/json
 
