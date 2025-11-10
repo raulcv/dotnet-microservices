@@ -1,22 +1,22 @@
-name: Add Adult deployment
+name: GetAdult deployment
 
 on:
   push:
     branches: [ "main" ]
 
 env:
-  SERVICE_NAME: addadult
+  SERVICE_NAME: getadults
   RESOURCE_GROUP: rg-microservice
-  IMAGE_BASE_NAME: raulcv/addadult:latest
+  IMAGE_BASE_NAME: raulcv/getadults:latest
   ENVIRONMENT_NAME: env-microservice
 
 jobs:
   AddMember:
-    name: Add Adult deployment
+    name: Get Adults deployment
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ${{ github.workspace }}/microservices/AddAdult
+        working-directory: ${{ github.workspace }}/microservices/GetAdults
     steps:
       - name: Check out the repo
         uses: actions/checkout@v3
@@ -46,5 +46,4 @@ jobs:
         run: |
           az containerapp up --name $SERVICE_NAME --image $IMAGE_BASE_NAME \
           --resource-group $RESOURCE_GROUP --environment $ENVIRONMENT_NAME  \
-          --env-vars SERVICEBUS_CONNECTION_STRING="${{ secrets.SERVICE_BUS_CONNECTION_STRING }}" SERVICEBUS_TOPICADULT_NAME="${{ secrets.SERVICEBUS_TOPICADULT_NAME }}"
-          SQL_CONNECTION_STRING="${{ secrets.SQL_CONNECTION_STRING }}"
+          --env-vars SQL_CONNECTION_STRING="${{secrets.SQL_CONNECTION_STRING}}"
