@@ -24,7 +24,7 @@ Content-Type: application/json
 Accept: application/json
 
 ### Azure Adult
-POST {{Azure_HostAddress}}/addmember?name=PeterAzure&LastName=Azure&birthyear=1999
+POST {{Azure_HostAddress}}/addmember?name=PeterAzure2&LastName=Azure2&birthyear=1998
 Content-Type: application/json
 Accept: application/json
 

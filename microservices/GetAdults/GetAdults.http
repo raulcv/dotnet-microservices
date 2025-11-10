@@ -1,9 +1,14 @@
 @GetAdults_HostAddress = http://localhost:5137
 @Docker_HostAddress = http://localhost:5005
+@Azure_HostAddress = https://getadults.gentlesmoke-3e8e96d3.eastus2.azurecontainerapps.io
 
 GET {{GetAdults_HostAddress}}/Adults/
 Accept: application/json
 
-###
+### Docker
 GET {{Docker_HostAddress}}/Adults/
+Accept: application/json
+
+### Azure
+GET {{Azure_HostAddress}}/Adults/
 Accept: application/json
