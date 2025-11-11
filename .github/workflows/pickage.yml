@@ -9,6 +9,7 @@ env:
   RESOURCE_GROUP: rg-microservice
   IMAGE_BASE_NAME: raulcv/pickage:latest
   ENVIRONMENT_NAME: env-microservice
+  REVISION_SUFFIX: ${{ github.sha }}
 
 jobs:
   build-and-deploy:
@@ -51,4 +52,6 @@ jobs:
         run: |
           az containerapp up --name $SERVICE_NAME --image $IMAGE_BASE_NAME \
           --resource-group $RESOURCE_GROUP --environment $ENVIRONMENT_NAME  \
-          --env-vars SERVICEBUS_CONNECTION_STRING="${{secrets.SERVICEBUS_CONNECTION_STRING}}" SERVICEBUS_QUEUE_NAME="${{secrets.SERVICEBUS_QUEUE_NAME}}"
+          --env-vars SERVICEBUS_CONNECTION_STRING="${{secrets.SERVICEBUS_CONNECTION_STRING}}" SERVICEBUS_QUEUE_NAME="${{secrets.SERVICEBUS_QUEUE_NAME}}" \
+          --revision-suffix REVISION_SUFFIX: ${{ github.sha }}
+

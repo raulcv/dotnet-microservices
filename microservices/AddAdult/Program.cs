@@ -17,7 +17,7 @@ Host.CreateDefaultBuilder(args)
     string connectionString = hostContext.Configuration.GetConnectionString("DefaultConnection") ?? Environment.GetEnvironmentVariable("SQL_CONNECTION_STRING")!;
        IConfiguration configuration = hostContext.Configuration;
        string environmentName = hostContext.HostingEnvironment.EnvironmentName;
-       Console.WriteLine($"Running in environment: {environmentName}");
+       Console.WriteLine($"Running in environment^^: {environmentName}");
        services.AddOptions();
        services.AddHostedService<Worker>();
        services.AddDbContext<DataContext>(options =>

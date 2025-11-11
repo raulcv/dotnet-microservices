@@ -9,6 +9,8 @@ env:
   RESOURCE_GROUP: rg-microservice
   IMAGE_BASE_NAME: raulcv/addadult:latest
   ENVIRONMENT_NAME: env-microservice
+  REVISION_SUFFIX: ${{ github.sha }}
+
 
 jobs:
   build-and-deploy:
@@ -47,4 +49,4 @@ jobs:
           az containerapp up --name $SERVICE_NAME --image $IMAGE_BASE_NAME \
           --resource-group $RESOURCE_GROUP --environment $ENVIRONMENT_NAME  \
           --env-vars SERVICEBUS_CONNECTION_STRING="${{secrets.SERVICEBUS_CONNECTION_STRING}}" SERVICEBUS_TOPICADULT_NAME="${{secrets.SERVICEBUS_TOPICADULT_NAME}}" \
-          SQL_CONNECTION_STRING="${{secrets.SQL_CONNECTION_STRING}}" --debug
+          SQL_CONNECTION_STRING="${{secrets.SQL_CONNECTION_STRING}}" --revision-suffix $REVISION_SUFFIX --debug
