@@ -18,7 +18,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddChild", "microservices\A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GetAdultById", "microservices\GetAdultById\GetAdultById.csproj", "{598E053A-D393-FD96-A016-82AF5BB8B48C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GetAdults", "microservices\GetAdults\GetAdults.csproj", "{42BC20A1-C1E2-E7BF-64DD-23A389AFAF8F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GetAdult", "microservices\GetAdult\GetAdult.csproj", "{42BC20A1-C1E2-E7BF-64DD-23A389AFAF8F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GetChildById", "microservices\GetChildById\GetChildById.csproj", "{FFF136C8-1FD0-C6BF-F8A7-CFD6601FF7E3}"
 EndProject

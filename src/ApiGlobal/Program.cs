@@ -21,9 +21,9 @@ app.UseSwagger();
 app.UseSwaggerUI();
 app.UseHttpsRedirection();
 
-async Task<List<Adult>> GetAdults(DataContext context) => await context.Adult.ToListAsync();
-app.MapGet("/Adults", async (DataContext context) => await GetAdults(context))
-.WithName("GetAdults")
+async Task<List<Adult>> GetAdult(DataContext context) => await context.Adult.ToListAsync();
+app.MapGet("/Adult", async (DataContext context) => await GetAdult(context))
+.WithName("GetAdult")
 .WithOpenApi();
 
 async Task<List<Child>> GetChildren(DataContext context) => await context.Child.ToListAsync();
@@ -39,16 +39,16 @@ app.MapGet("/Child/{id}", async (DataContext context, int id) => await context.C
 .WithName("GetChildById")
 .WithOpenApi();
 
-app.MapPost("Add/Adults",async(DataContext context, Adult item) =>
+app.MapPost("Add/Adult",async(DataContext context, Adult item) =>
 {
     context.Adult.Add(item);
     await context.SaveChangesAsync();
-    return Results.Ok(await GetAdults(context));
+    return Results.Ok(await GetAdult(context));
 })
 .WithName("AddAdult")
 .WithOpenApi();
 
-app.MapPost("Add/Children",async(DataContext context, Child item) =>
+app.MapPost("Add/Child",async(DataContext context, Child item) =>
 {
     context.Child.Add(item);
     await context.SaveChangesAsync();
