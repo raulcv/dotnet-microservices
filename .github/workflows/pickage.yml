@@ -44,7 +44,7 @@ jobs:
 
       - name: Check Docker image version
         run: |
-          IMAGE_VERSION=$(docker image inspect --format='{{.RepoDigest}}' $IMAGE_BASE_NAME)
+          IMAGE_VERSION=$(docker image inspect --format='{{.RepoDigests}}' $IMAGE_BASE_NAME)
           echo "Docker image version: $IMAGE_VERSION"
 
       - name: Deploy Container App
