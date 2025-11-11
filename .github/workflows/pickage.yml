@@ -30,7 +30,7 @@ jobs:
 
       - name: Build Docker NET image
         run: | 
-          docker build --platform linux -t $IMAGE_BASE_NAME .
+          docker build --platform linux --tag $IMAGE_BASE_NAME .
   
       - name: Login to Docker Hub
         uses: docker/login-action@v2
@@ -51,5 +51,4 @@ jobs:
         run: |
           az containerapp up --name $SERVICE_NAME --image $IMAGE_BASE_NAME \
           --resource-group $RESOURCE_GROUP --environment $ENVIRONMENT_NAME  \
-          --env-vars SERVICEBUS_CONNECTION_STRING="${{secrets.SERVICEBUS_CONNECTION_STRING}}" SERVICEBUS_QUEUE_NAME="${{secrets.SERVICEBUS_QUEUE_NAME}}" \
-          --update-image
+          --env-vars SERVICEBUS_CONNECTION_STRING="${{secrets.SERVICEBUS_CONNECTION_STRING}}" SERVICEBUS_QUEUE_NAME="${{secrets.SERVICEBUS_QUEUE_NAME}}"
