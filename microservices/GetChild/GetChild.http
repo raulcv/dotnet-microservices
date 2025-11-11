@@ -1,0 +1,9 @@
+@GetAdults_HostAddress = http://localhost:5085
+@Docker_HostAddress = http://localhost:5006
+
+GET {{GetAdults_HostAddress}}/Childs/
+Accept: application/json
+
+###
+GET {{Docker_HostAddress}}/Childs/
+Accept: application/json
