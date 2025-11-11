@@ -5,18 +5,18 @@ on:
     branches: [ "main" ]
 
 env:
-  SERVICE_NAME: getadults
+  SERVICE_NAME: getadult
   RESOURCE_GROUP: rg-microservice
-  IMAGE_BASE_NAME: raulcv/getadults:latest
+  IMAGE_BASE_NAME: raulcv/getadult:latest
   ENVIRONMENT_NAME: env-microservice
 
 jobs:
-  AddMember:
+  build-and-deploy:
     name: Get Adults deployment
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ${{ github.workspace }}/microservices/GetAdults
+        working-directory: ${{ github.workspace }}/microservices/GetAdult
     steps:
       - name: Check out the repo
         uses: actions/checkout@v3

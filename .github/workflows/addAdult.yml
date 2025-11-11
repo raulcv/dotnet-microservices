@@ -11,7 +11,7 @@ env:
   ENVIRONMENT_NAME: env-microservice
 
 jobs:
-  AddMember:
+  build-and-deploy:
     name: Add Adult deployment
     runs-on: ubuntu-latest
     defaults:

@@ -11,7 +11,7 @@ env:
   ENVIRONMENT_NAME: env-microservice
 
 jobs:
-  GetChild:
+  build-and-deploy:
     name: Get Child deployment
     runs-on: ubuntu-latest
     defaults:
