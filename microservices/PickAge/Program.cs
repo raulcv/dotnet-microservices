@@ -11,8 +11,13 @@ IServiceCollection serviceDescriptors = new ServiceCollection();
 Host.CreateDefaultBuilder(args)
    .ConfigureHostConfiguration(configHost =>
    {
-    if (app.Environment.IsDevelopment()){
+       if (app.Environment.IsDevelopment())
+       {
            configHost.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true).Build();
+           Console.WriteLine("Development, development is enabled: {0}", app.Environment.IsDevelopment());
+       }else
+       {
+           Console.WriteLine("Production, development is avoided: {0}", app.Environment.IsDevelopment());
        }
    })
    .ConfigureServices((hostContext, services) =>
