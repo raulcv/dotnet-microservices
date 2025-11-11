@@ -59,7 +59,7 @@ namespace PickAge
       if (birthyear < currentYear - 18)
       {
         Console.WriteLine($"Adult: {body}");
-        var topicName = "adultstopic";
+        var topicName = "adulttopic";
         var topicClient = _client.CreateSender(topicName);
         var message = new ServiceBusMessage(body);
         Console.WriteLine($"Sending message to topic: {topicName}");
@@ -68,7 +68,7 @@ namespace PickAge
       else
       {
         Console.WriteLine($"Child: {body}");
-        var topicName = "childrentopic";
+        var topicName = "childtopic";
         var topicClient = _client.CreateSender(topicName);
         var message = new ServiceBusMessage(body);
         Console.WriteLine($"Sending message to topic: {topicName}");
