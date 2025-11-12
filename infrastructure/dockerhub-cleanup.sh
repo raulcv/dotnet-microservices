@@ -3,7 +3,7 @@ set -e
 
 # Required environment variables:
 # DOCKERHUB_USERNAME - your Docker Hub username
-# DOCKERHUB_PASSWORD - your Docker Hub password or personal access token
+# DOCKERHUB_PASSWORD - your personal access token
 # REPOSITORY - repository name (e.g. 'raulcv/addadult')
 # KEEP_LAST - number of most recent tags to keep (e.g. 5)
 

@@ -49,14 +49,16 @@ jobs:
           docker image prune -a -f
 
       - name: Docker Hub Cleanup Old Images
+        working-directory: infrastructure
         env:
           DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
           DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
           REPOSITORY: $IMAGE_BASE_NAME
           KEEP_LAST: 3
         run: |
-          chmod +x ./infrastructure/dockerhub-cleanup.sh
-          ./infrastructure/dockerhub-cleanup.sh
+          ls -l infrastructure/
+          chmod +x dockerhub-cleanup.sh
+          infrastructure/dockerhub-cleanup.sh
 
       - name: Deploy Container App
         run: |
