@@ -49,9 +49,10 @@ jobs:
           docker image prune -a -f
 
       - name: Docker Hub Cleanup Old Images
+        working-directory: ${{ github.workspace }}
         env:
           DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-          DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
+          DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_TOKEN }}
           REPOSITORY: $IMAGE_BASE_NAME
           KEEP_LAST: 3
         run: |
