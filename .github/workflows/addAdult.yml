@@ -7,7 +7,7 @@ on:
 env:
   SERVICE_NAME: addadult
   RESOURCE_GROUP: rg-microservice
-  IMAGE_BASE_NAME: raulcv/addadult:latest
+  IMAGE_BASE_NAME: raulcv/addadult
   ENVIRONMENT_NAME: env-microservice
   IMAGE_TAG: ${{ github.sha }}
 
@@ -52,7 +52,7 @@ jobs:
         env:
           DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
           DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
-          REPOSITORY: raulcv/addadult
+          REPOSITORY: $IMAGE_BASE_NAME
           KEEP_LAST: 3
         run: |
           chmod +x ./infrastructure/dockerhub-cleanup.sh
