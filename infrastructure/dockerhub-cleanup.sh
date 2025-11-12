@@ -7,6 +7,14 @@ set -e
 # REPOSITORY - repository name (e.g. 'raulcv/addadult')
 # KEEP_LAST - number of most recent tags to keep (e.g. 5)
 
+if [ -z "$DOCKERHUB_USERNAME" ] || [ -z "$DOCKERHUB_PASSWORD" ] || [ -z "$REPOSITORY" ]; then
+  echo "Missing required environment variables."
+  echo "DOCKERHUB_USERNAME: ${DOCKERHUB_USERNAME}"
+  echo "DOCKERHUB_PASSWORD: ${DOCKERHUB_PASSWORD}"
+  echo "REPOSITORY: ${REPOSITORY}"
+  exit 1
+fi
+
 KEEP_LAST=${KEEP_LAST:-5}
 
 echo "Logging into Docker Hub..."
@@ -19,9 +27,10 @@ fi
 
 echo "Fetching tags for repository $REPOSITORY..."
 TAGS=$(curl -s -H "Authorization: JWT $TOKEN" "https://hub.docker.com/v2/repositories/$REPOSITORY/tags/?page_size=100" | jq -r '.results | sort_by(.last_updated) | .[].name')
-
+echo "Fetched tags: $TAGS"
 # Convert tags to array
-mapfile -t TAG_ARRAY <<<"$TAGS"
+TAG_ARRAY=($TAGS)
+echo "Total tags: ${#TAG_ARRAY[@]}"
 
 TOTAL_TAGS=${#TAG_ARRAY[@]}
 DELETE_COUNT=$((TOTAL_TAGS - KEEP_LAST))
