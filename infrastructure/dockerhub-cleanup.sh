@@ -17,11 +17,21 @@ fi
 
 KEEP_LAST=${KEEP_LAST:-5}
 
-echo "Logging into Docker Hub..."
-TOKEN=$(curl -s -H "Content-Type: application/json" -X POST -d "{\"username\": \"$DOCKERHUB_USERNAME\", \"password\": \"$DOCKERHUB_PASSWORD\"}" https://hub.docker.com/v2/users/login/ | jq -r .token)
+# echo "Logging into Docker Hub..."
+# TOKEN=$(curl -s -H "Content-Type: application/json" -X POST -d "{\"username\": \"$DOCKERHUB_USERNAME\", \"password\": \"$DOCKERHUB_PASSWORD\"}" https://hub.docker.com/v2/users/login/ | jq -r .token)
 
-if [ -z "$TOKEN" ]; then
-  echo "Failed to get authentication token."
+# if [ -z "$TOKEN" ]; then
+#   echo "Failed to get authentication token."
+#   exit 1
+# fi
+
+AUTH_RESPONSE=$(curl -s -H "Content-Type: application/json" -X POST -d "{\"username\": \"$DOCKERHUB_USERNAME\", \"password\": \"$DOCKERHUB_PASSWORD\"}" https://hub.docker.com/v2/users/login/)
+
+TOKEN=$(echo "$AUTH_RESPONSE" | jq -r .token)
+
+if [ "$TOKEN" == "null" ] || [ -z "$TOKEN" ]; then
+  echo "Failed to authenticate to Docker Hub. Response:"
+  echo "$AUTH_RESPONSE"
   exit 1
 fi
 
