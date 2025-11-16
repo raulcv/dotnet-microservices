@@ -8,7 +8,7 @@ set -e
 # KEEP_LAST - number of most recent tags to keep (e.g. 5)
 
 # Cut off the tag from the repository
-$REPOSITORY=$(echo "$REPOSITORY" | cut -d ':' -f 1)
+REPOSITORY=$(echo "$REPOSITORY" | cut -d ':' -f 1)
 
 if [ -z "$DOCKERHUB_USERNAME" ] || [ -z "$DOCKERHUB_PASSWORD" ] || [ -z "$REPOSITORY" ]; then
   echo "Missing required environment variables."
