@@ -46,7 +46,7 @@ if [ -z "$IMAGES_RESPONSE" ]; then
   exit 1
 fi
 
-TAGS=$(echo "$IMAGES_RESPONSE" | jq -r '.results' | jq '.sort_by(.tag_last_pushed)' | jq -r '.[] .name')
+TAGS=$(echo "$IMAGES_RESPONSE" | jq -r '.results' | jq 'sort_by(.tag_last_pushed)' | jq -r '.[] .name')
 
 echo "Fetched tags: $TAGS"
 # Convert tags to array
