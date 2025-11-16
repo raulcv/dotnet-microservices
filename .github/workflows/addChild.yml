@@ -1,23 +1,23 @@
-name: Add Adult deployment
+name: Add Child deployment
 
 on:
   push:
     branches: [ "main" ]
 
 env:
-  SERVICE_NAME: addadult
+  SERVICE_NAME: addchild
   RESOURCE_GROUP: rg-microservice
-  IMAGE_BASE_NAME: raulcv/addadult
+  IMAGE_BASE_NAME: raulcv/addchild
   ENVIRONMENT_NAME: env-microservice
   IMAGE_TAG: ${{ github.sha }}
 
 jobs:
   build-and-deploy:
-    name: Add Adult deployment
+    name: Add Child deployment
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ${{ github.workspace }}/microservices/AddAdult
+        working-directory: ${{ github.workspace }}/microservices/AddChild
     steps:
       - name: Check out the repo
         uses: actions/checkout@v3
@@ -53,10 +53,9 @@ jobs:
         env:
           DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
           DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_TOKEN }}
-          REPOSITORY: raulcv/addadult
+          REPOSITORY: raulcv/addChild
           KEEP_LAST: 3
         run: |
-          ls -l infrastructure/
           chmod +x ./infrastructure/dockerhub-cleanup.sh
           ./infrastructure/dockerhub-cleanup.sh
 
@@ -64,5 +63,5 @@ jobs:
         run: |
           az containerapp up --name $SERVICE_NAME --image $IMAGE_BASE_NAME:$IMAGE_TAG \
           --resource-group $RESOURCE_GROUP --environment $ENVIRONMENT_NAME  \
-          --env-vars SERVICEBUS_CONNECTION_STRING="${{secrets.SERVICEBUS_CONNECTION_STRING}}" SERVICEBUS_TOPICADULT_NAME="${{secrets.SERVICEBUS_TOPICADULT_NAME}}" \
-          SQL_CONNECTION_STRING="${{secrets.SQL_CONNECTION_STRING}}" --debug
+          --env-vars SERVICEBUS_CONNECTION_STRING="${{secrets.SERVICE_BUS_CONNECTION_STRING}}" SERVICEBUS_TOPICCHILD_NAME="${{secrets.SERVICEBUS_TOPICCHILD_NAME}}" \
+          SQL_CONNECTION_STRING="${{secrets.SQL_CONNECTION_STRING}}"
