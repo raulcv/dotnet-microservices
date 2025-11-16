@@ -30,8 +30,6 @@ fi
 
 TOKEN=$(echo "$AUTH_RESPONSE" | jq -r .token)
 
-echo "Authentication token: $TOKEN"
-
 if [ "$TOKEN" == "null" ] || [ -z "$TOKEN" ]; then
   echo "Failed to authenticate to Docker Hub. Response:"
   echo "$AUTH_RESPONSE"

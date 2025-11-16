@@ -63,5 +63,5 @@ jobs:
         run: |
           az containerapp up --name $SERVICE_NAME --image $IMAGE_BASE_NAME:$IMAGE_TAG \
           --resource-group $RESOURCE_GROUP --environment $ENVIRONMENT_NAME  \
-          --env-vars SERVICEBUS_CONNECTION_STRING="${{secrets.SERVICE_BUS_CONNECTION_STRING}}" SERVICEBUS_TOPICCHILD_NAME="${{secrets.SERVICEBUS_TOPICCHILD_NAME}}" \
+          --env-vars SERVICEBUS_CONNECTION_STRING="${{secrets.SERVICEBUS_CONNECTION_STRING}}" SERVICEBUS_TOPICCHILD_NAME="${{secrets.SERVICEBUS_TOPICCHILD_NAME}}" \
           SQL_CONNECTION_STRING="${{secrets.SQL_CONNECTION_STRING}}"
