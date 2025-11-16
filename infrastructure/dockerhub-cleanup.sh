@@ -4,8 +4,11 @@ set -e
 # Required environment variables:
 # DOCKERHUB_USERNAME - your Docker Hub username
 # DOCKERHUB_PASSWORD - your personal access token
-# REPOSITORY - repository name (e.g. 'raulcv/addadult')
+# REPOSITORY - repository name (e.g. 'raulcv/addadult:latest')
 # KEEP_LAST - number of most recent tags to keep (e.g. 5)
+
+# Cut off the tag from the repository
+$REPOSITORY=$(echo "$REPOSITORY" | cut -d ':' -f 1)
 
 if [ -z "$DOCKERHUB_USERNAME" ] || [ -z "$DOCKERHUB_PASSWORD" ] || [ -z "$REPOSITORY" ]; then
   echo "Missing required environment variables."
@@ -13,22 +16,9 @@ if [ -z "$DOCKERHUB_USERNAME" ] || [ -z "$DOCKERHUB_PASSWORD" ] || [ -z "$REPOSI
   echo "DOCKERHUB_PASSWORD: ${DOCKERHUB_PASSWORD}"
   echo "REPOSITORY: ${REPOSITORY}"
   exit 1
-else 
-  echo "Environment variables are set."
-  echo "DOCKERHUB_USERNAME: ${DOCKERHUB_USERNAME}"
-  echo "DOCKERHUB_PASSWORD: ${DOCKERHUB_PASSWORD}"
-  echo "REPOSITORY: ${REPOSITORY}"
 fi
 
 KEEP_LAST=${KEEP_LAST:-5}
-
-# echo "Logging into Docker Hub..."
-# TOKEN=$(curl -s -H "Content-Type: application/json" -X POST -d "{\"username\": \"$DOCKERHUB_USERNAME\", \"password\": \"$DOCKERHUB_PASSWORD\"}" https://hub.docker.com/v2/users/login/ | jq -r .token)
-
-# if [ -z "$TOKEN" ]; then
-#   echo "Failed to get authentication token."
-#   exit 1
-# fi
 
 AUTH_RESPONSE=$(curl -s -H "Content-Type: application/json" -X POST -d "{\"username\": \"$DOCKERHUB_USERNAME\", \"password\": \"$DOCKERHUB_PASSWORD\"}" https://hub.docker.com/v2/users/login/)
 
@@ -56,7 +46,7 @@ if [ -z "$IMAGES_RESPONSE" ]; then
   exit 1
 fi
 
-TAGS=$(echo "$IMAGES_RESPONSE" | jq -r '.results[] | .name')
+TAGS=$(echo "$IMAGES_RESPONSE" | jq -r '.results' | jq '.sort_by(.tag_last_pushed)' | jq -r '.[] .name')
 
 echo "Fetched tags: $TAGS"
 # Convert tags to array
