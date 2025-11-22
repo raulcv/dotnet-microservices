@@ -1,0 +1,11 @@
+@GetAdultById_HostAddress = http://localhost:5223
+@Docker_HostAddress = http://localhost:5007
+
+### Local
+GET {{GetAdultById_HostAddress}}/AdultById/1
+Accept: application/json
+
+### Docker
+GET {{Docker_HostAddress}}/AdultById/3
+Accept: application/json
+

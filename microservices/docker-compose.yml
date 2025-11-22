@@ -1,0 +1,51 @@
+  services:
+    addmember:
+      image: addmember
+      build:
+        context: ./AddMember
+        dockerfile: Dockerfile
+      ports:
+        - 8085:8080
+    pickage:
+      image: pickage
+      build:
+        context: ./PickAge
+        dockerfile: Dockerfile
+    addadult:
+      image: addadult
+      build:
+        context: ./AddAdult
+        dockerfile: Dockerfile
+    addchild:
+      image: addchild
+      build:
+        context: ./AddChild
+        dockerfile: Dockerfile
+    getAdult:
+      image: getadult
+      build:
+        context: ./GetAdult
+        dockerfile: Dockerfile
+      ports:
+        - "5005:8080"
+    getChild:
+      image: getchild
+      build:
+        context: ./GetChild
+        dockerfile: Dockerfile
+      ports:
+        - "5006:8080"
+    getAdultById:
+      image: getadultbyid
+      build:
+        context: ./GetAdultById
+        dockerfile: Dockerfile
+      ports:
+        - "5007:8080"
+    getChildById:
+      image: getchildbyid
+      build:
+        context: ./GetChildById
+        dockerfile: Dockerfile
+      ports:
+        - "5008:8080"
